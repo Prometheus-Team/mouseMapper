@@ -29,7 +29,7 @@ class MouseInput:
 
 if __name__=="__main__":
 
-	m = MouseMovement();
+	m = MouseInput();
 	print(isPython3)
 	
 	if isPython3:

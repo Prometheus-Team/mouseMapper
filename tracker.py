@@ -30,12 +30,13 @@ class MouseTracker:
 		print("Location is now", self.getLocation())
 
 	def setRotation(self, z):
-		self.currentRotation = pyrr.quaternion.create_from_z_rotation(z)
+		self.currentRotation = pyrr.quaternion.create_from_z_rotation(math.radians(z))
+		print(self.currentRotation)
 		
 	def addTranslation(self, x = 0, y = 0, z = 0):
-		translationMatrix = pyrr.matrix44.create_from_translation((x,y,z))
-		print("translation matrix", translationMatrix)
-		offsetMatrix = np.dot(translationMatrix, pyrr.matrix44.create_from_quaternion(self.currentRotation))
-		print("offset matrix", offsetMatrix)
-		self.currentTransform = np.dot(offsetMatrix, self.currentTransform)
+		vector = pyrr.vector3.create(x,y,z)
+		rotatedVector = pyrr.quaternion.apply_to_vector(self.currentRotation, vector)
+		translationMatrix = pyrr.matrix44.create_from_translation(rotatedVector)
+		#print("translation matrix", translationMatrix)
+		self.currentTransform = np.dot(translationMatrix, self.currentTransform)
 		

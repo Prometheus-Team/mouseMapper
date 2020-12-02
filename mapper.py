@@ -23,5 +23,5 @@ if __name__=="__main__":
 
 	m = MouseMapper()
 	#set the method that returns rotation in degrees
-	m.setGetRotationMethod(lambda : 0)
+	m.setGetRotationMethod(lambda : 90)
 	m.run()
